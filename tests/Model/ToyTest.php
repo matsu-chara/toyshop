@@ -14,12 +14,12 @@ class ToyTest extends \PHPUnit_Framework_TestCase
 
     public function testName()
     {
-        $this->assertEquals('ToyName', $this->toy->name);
+        $this->assertSame('ToyName', $this->toy->name);
     }
 
     public function testArrayCast()
     {
-        $this->assertEquals(
+        $this->assertSame(
             array(
                 'name'        => 'ToyName',
                 'quantity'    => '53',
