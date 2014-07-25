@@ -2,8 +2,6 @@
 use Silex\Application;
 use Model\Toy;
 
-require_once __DIR__.'/vendor/autoload.php';
-
 $app = new Silex\Application();
 $app['debug'] = true;
 
@@ -33,4 +31,4 @@ $app->get('/{stockcode}', function (Application $app, $stockcode) use ($toys) {
     return json_encode($toys[$stockcode]);
 });
 
-$app->run();
+return $app;
