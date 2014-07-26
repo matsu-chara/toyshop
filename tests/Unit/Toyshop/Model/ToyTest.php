@@ -1,7 +1,7 @@
 <?php
-namespace Tests\Model;
+namespace Tests\Unit\Toyshop\Model;
 
-use Model\Toy;
+use Toyshop\Model\Toy;
 
 class ToyTest extends \PHPUnit_Framework_TestCase
 {

@@ -1,34 +1,20 @@
 <?php
 use Silex\Application;
-use Model\Toy;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Toyshop\Model\Toy;
+use Toyshop\Controller\StockcodeController;
 
-$app = new Silex\Application();
+$app = new Application();
 $app['debug'] = true;
 
-$toys = array(
-    '00001' => new Toy(
-        'Racing Car',
-        '53',
-        '...',
-        'racing_car.jpg'
-    ),
-    '00002' => new Toy(
-        'Raspberry Pi',
-        '13',
-        '...',
-        'raspberry_pi.jpg'
-    )
-);
+$app->mount('/', new StockcodeController());
 
-$app->get('/', function () use ($toys) {
-    return json_encode($toys);
-});
-
-$app->get('/{stockcode}', function (Application $app, $stockcode) use ($toys) {
-    if (!isset($toys[$stockcode])) {
-        $app->abort(404, "Stockcode {$stockcode} does not exist.");
+$app->error(function (\Exception $e, $code) use ($app) {
+    if ($app['debug']) {
+        return;
     }
-    return json_encode($toys[$stockcode]);
+    return new Response($code. ": ". $e->getMessage());
 });
 
 return $app;
