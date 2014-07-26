@@ -20,5 +20,9 @@ class ContacFormTest extends WebTestCase
         $crawler = $client->request('GET', '/');
 
         $this->assertTrue($client->getResponse()->isOk());
+        $this->assertJsonStringEqualsJsonString(
+            '{"00001":{"name":"Racing Car","quantity":"53","description":"...","image":"racing_car.jpg"},"00002":{"name":"Raspberry Pi","quantity":"13","description":"...","image":"raspberry_pi.jpg"}}',
+            $client->getResponse()->getContent()
+        );
     }
 }
